@@ -14,7 +14,7 @@ Ex. `http://localhost:9000/greeting?name=Pedro`
     java -jar .\target\virtualization-lab-1.0.0.jar
 ```
 
-## Evidence
+## Evidence PART 1
 
 + Testing via curl
 ![evd_curl](/imgs/evd00.png)
@@ -58,3 +58,31 @@ Finally, we runned two isolated instances
 ```
 
 ![3_dif_cont_running](/imgs/evd03.png)
+
+## PART 3
+
+We created `compose.yml` and configured it eith mongodb.
+
+After that, we built and started the compose and tested the url `http://localhost:8087/greeting?name=Compose`
+
+```shell
+    docker compose up -d --build
+```
+![browsing_compose](/imgs/evd04.png)
+
+Finally, we inspected the db from inside its container using:
+
+```shell
+    docker compose exec db mongosh
+```
+
+and asked for:
+
+```MongoDB
+    show dbs
+    use workshop
+    db.messages.insertOne({ message: "Hello from Docker Compose" })
+    db.messages.find()
+```
+
+![mongoDB_request](/imgs/evd05.png)
