@@ -1,4 +1,4 @@
-# Workshop: Containerizing and Deplaying a Java Web Application - PART 1
+# Workshop: Containerizing and Deplaying a Java Web Application - SpringBoot
 
 ## Description
 Simple SpringRest App. Invoke it via curl or browser.
