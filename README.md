@@ -17,9 +17,9 @@ Ex. `http://localhost:9000/greeting?name=Pedro`
 ## Evidence PART 1
 
 + Testing via curl
-![evd_curl](/imgs/evd00.png)
+  ![evd_curl](/imgs/evd00.png)
 + Testing via browser
-![evd_edge](/imgs/evd01.png)
+  ![evd_edge](/imgs/evd01.png)
 
 ## PART 2
 we created and configured the Dockerfile.Then built the image and runned it with:
@@ -45,7 +45,7 @@ Finally, we runned two isolated instances
     docker run -d `
     --name virtualization-lab-2 `
     -e PORT=9000 `
-    -p 34000:9000 `
+    -p 34001:9000 `
     ExUser/virtualization-lab:1.0    
 ```
 
@@ -53,9 +53,15 @@ Finally, we runned two isolated instances
     docker run -d `
     --name virtualization-lab-3 `
     -e PORT=9000 `
-    -p 34000:9000 `
+    -p 34002:9000 `
     ExUser/virtualization-lab:1.0    
 ```
+
+Each container responds independently on its own mapped port:
+
+- http://localhost:34000/greeting?name=Container1
+- http://localhost:34001/greeting?name=Container2
+- http://localhost:34002/greeting?name=Container3
 
 ![3_dif_cont_running](/imgs/evd03.png)
 
@@ -86,3 +92,27 @@ and asked for:
 ```
 
 ![mongoDB_request](/imgs/evd05.png)
+
+## PART 4
+
+We logged in to Docker Hub and published the image with both tags.
+
+```shell
+docker login
+```
+
+```shell
+docker tag juanpa2001/virtualization-lab:1.0 juanpa2001/virtualization-lab:latest
+docker push juanpa2001/virtualization-lab:1.0
+docker push juanpa2001/virtualization-lab:latest
+```
+
+Docker Hub repository: https://hub.docker.com/r/juanpa2001/virtualization-lab
+
+To pull the image from anywhere:
+
+```shell
+docker pull juanpa2001/virtualization-lab:1.0
+```
+
+![dockerhub_repo](/imgs/evd06.png)
